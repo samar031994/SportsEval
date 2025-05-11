@@ -46,18 +46,18 @@ const CardMapper = () => {
             height: "50px",
           }}
         >
-          <S.ColorDiv color="red">
-            <Text size="md" fw={500}>
+          <S.ColorDiv color="red" style={{borderRadius: "8px 0 0 8px"}}>
+            <Text size="md" fw={700}>
               (0 - 4)
             </Text>
           </S.ColorDiv>
           <S.ColorDiv color="yellow">
-            <Text size="md" fw={500}>
+            <Text size="md" fw={700}>
               (5 - 8)
             </Text>
           </S.ColorDiv>
-          <S.ColorDiv color="green">
-            <Text size="md" fw={500}>
+          <S.ColorDiv color="green" style={{borderRadius: "0 8px 8px 0"}}>
+            <Text size="md" fw={700}>
               (9 - 12)
             </Text>
           </S.ColorDiv>
