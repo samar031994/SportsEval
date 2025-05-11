@@ -1,5 +1,6 @@
+"use client";
 import { useAtom } from "jotai";
-import React from "react";
+import React, { use, useEffect } from "react";
 import * as R from "../../components/Report/Report.atom";
 import * as S from "../../components/Report/Report.style";
 import { useRouter } from "next/router";
@@ -46,7 +47,7 @@ const CardMapper = () => {
             height: "50px",
           }}
         >
-          <S.ColorDiv color="red" style={{borderRadius: "8px 0 0 8px"}}>
+          <S.ColorDiv color="red" style={{ borderRadius: "8px 0 0 8px" }}>
             <Text size="md" fw={700}>
               (0 - 4)
             </Text>
@@ -56,7 +57,7 @@ const CardMapper = () => {
               (5 - 8)
             </Text>
           </S.ColorDiv>
-          <S.ColorDiv color="green" style={{borderRadius: "0 8px 8px 0"}}>
+          <S.ColorDiv color="green" style={{ borderRadius: "0 8px 8px 0" }}>
             <Text size="md" fw={700}>
               (9 - 12)
             </Text>
@@ -71,9 +72,11 @@ const CardMapper = () => {
 const Report = () => {
   const [card] = useAtom(R.CurrentcardAtom);
   const router = useRouter();
-  if (!card || card.length === 0) {
-    router.replace("/404");
-  }
+  useEffect(() => {
+    if (!card || card.length === 0) {
+      router.replace("/404");
+    }
+  }, []);
   return (
     <>
       <Button
