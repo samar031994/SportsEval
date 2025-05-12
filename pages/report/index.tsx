@@ -1,6 +1,6 @@
 "use client";
 import { useAtom } from "jotai";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import * as R from "../../components/Report/Report.atom";
 import * as S from "../../components/Report/Report.style";
 import { useRouter } from "next/router";
@@ -76,7 +76,7 @@ const Report = () => {
     if (!card || card.length === 0) {
       router.replace("/404");
     }
-  }, []);
+  });
   return (
     <>
       <Button

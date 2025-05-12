@@ -1,18 +1,21 @@
 import React from "react";
 import { getSheetData } from "../api/google/googleSheets";
 import * as S from "../../components/Dashboard/Dashboard.style";
-import { Card, Image, Text } from "@mantine/core";
+import { Card, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import * as R from "../../components/Report/Report.atom";
 import { useAtom } from "jotai";
-
+import { useState } from "react";
 const Dashboard = (props) => {
   const { data } = props;
   const router = useRouter();
   const [card, setCard] = useAtom(R.CurrentcardAtom);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const responseCards = data.map((card) => {
     return (
       <Card
+        onMouseEnter={() => setHoveredCard(card[0])}
+        onMouseLeave={() => setHoveredCard(null)}
         shadow="sm"
         padding="xl"
         component="a"
@@ -22,6 +25,9 @@ const Dashboard = (props) => {
           cursor: "pointer",
           borderLeft: "8px solid #0070f3",
           margin: "16px",
+          transform: hoveredCard === card[0] ? "scale(1.05)" : "scale(1)",
+          transition: "transform 0.2s ease-in-out",
+          backgroundColor: hoveredCard === card[0] ? "#f0f8ff" : "white",
         }}
         key={card[0]}
         onClick={() => {
