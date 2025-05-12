@@ -7,29 +7,31 @@ import { useRouter } from "next/router";
 const Signin = () => {
   const router = useRouter();
   const { data } = useSession();
-  useLayoutEffect(() => {
-    if (data?.user) {
-      if (
-        process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(",").includes(
-          data.user.email!
-        )
-      ) {
-        router.replace("/dashboard");
-      } else {
-        router.replace("/401");
-      }
-    }
-  });
+
   return (
     <S.SignInWrapper>
-      <Button
-        variant="filled"
-        onClick={async () => await signIn("google")}
-        radius={"lg"}
-        style={{ justifyContent: "center", alignItems: "center" }}
-      >
-        Sign in with Google
-      </Button>
+      {(data.user &&
+        process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(",").includes(
+          data.user.email!
+        ) && (
+          <Button
+            variant="filled"
+            onClick={async () => router.replace("/dashboard")}
+            radius={"lg"}
+            style={{ justifyContent: "center", alignItems: "center" }}
+          >
+            View dashboard
+          </Button>
+        )) || (
+        <Button
+          variant="filled"
+          onClick={async () => await signIn("google")}
+          radius={"lg"}
+          style={{ justifyContent: "center", alignItems: "center" }}
+        >
+          Sign in with Google
+        </Button>
+      )}
     </S.SignInWrapper>
   );
 };
