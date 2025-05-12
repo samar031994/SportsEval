@@ -10,9 +10,10 @@ const Signin = () => {
 
   return (
     <S.SignInWrapper>
-      {(data.user &&
+      {(data &&
+        data.user &&
         process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(",").includes(
-          data.user.email!
+          data?.user.email!
         ) && (
           <Button
             variant="filled"
@@ -20,7 +21,7 @@ const Signin = () => {
             radius={"lg"}
             style={{ justifyContent: "center", alignItems: "center" }}
           >
-            View dashboard
+            {`View dashboard ${data.user.name}`}
           </Button>
         )) || (
         <Button
