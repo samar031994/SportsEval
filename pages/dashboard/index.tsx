@@ -6,37 +6,42 @@ import { useRouter } from "next/router";
 import * as R from "../../components/Report/Report.atom";
 import { useAtom } from "jotai";
 import { useState } from "react";
+import Link from "next/link";
 const Dashboard = (props) => {
+  console.log("Dashboard");
   const { data } = props;
   const router = useRouter();
+  console.log(router);
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const responseCards = data.map((card) => {
     return (
-      <Card
-        onMouseEnter={() => setHoveredCard(card[0])}
-        onMouseLeave={() => setHoveredCard(null)}
-        shadow="sm"
-        padding="xl"
-        component="a"
-        radius="md"
-        style={{
-          width: "225px",
-          cursor: "pointer",
-          borderLeft: "8px solid #0070f3",
-          margin: "16px",
-          transform: hoveredCard === card[0] ? "scale(1.05)" : "scale(1)",
-          transition: "transform 0.2s ease-in-out",
-          backgroundColor: hoveredCard === card[0] ? "#f0f8ff" : "white",
-        }}
-        key={card[0]}
-        onClick={() => {
-          setCard(card);
-          router.replace("/report");
-        }}
-      >
-        <Text>{card[0]}</Text>
-      </Card>
+      <Link href="/report" key={card[0]}>
+        <Card
+          onMouseEnter={() => setHoveredCard(card[0])}
+          onMouseLeave={() => setHoveredCard(null)}
+          shadow="sm"
+          padding="xl"
+          component="a"
+          radius="md"
+          style={{
+            width: "250px",
+            cursor: "pointer",
+            borderLeft: "8px solid #0070f3",
+            margin: "16px",
+            transform: hoveredCard === card[0] ? "scale(1.05)" : "scale(1)",
+            transition: "transform 0.2s ease-in-out",
+            backgroundColor: hoveredCard === card[0] ? "#f0f8ff" : "white",
+          }}
+          key={card[0]}
+          // onClick={() => {
+          //   setCard(card);
+          //   router.replace("/report");
+          // }}
+        >
+          <Text>{card[0]}</Text>
+        </Card>
+      </Link>
     );
   });
   return <S.DashboardWrapper>{responseCards}</S.DashboardWrapper>;

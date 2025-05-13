@@ -21,7 +21,7 @@ const Signin = () => {
             radius={"lg"}
             style={{ justifyContent: "center", alignItems: "center" }}
           >
-            {`View dashboard ${data.user.name}`}
+            {`View dashboard - ${data.user.name}`}
           </Button>
         )) || (
         <Button
