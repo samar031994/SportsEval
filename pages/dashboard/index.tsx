@@ -2,16 +2,12 @@ import React from "react";
 import { getSheetData } from "../api/google/googleSheets";
 import * as S from "../../components/Dashboard/Dashboard.style";
 import { Card, Text } from "@mantine/core";
-import { useRouter } from "next/router";
 import * as R from "../../components/Report/Report.atom";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import Link from "next/link";
 const Dashboard = (props) => {
-  console.log("Dashboard");
   const { data } = props;
-  const router = useRouter();
-  console.log(router);
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const responseCards = data.map((card) => {
