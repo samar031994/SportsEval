@@ -2,6 +2,7 @@
   "name": "SportsEval",
   "version": "0.1.0",
   "description": "NextJS app to create documents based on sports eval questionaires",
+  "homepage": "/",
   "scripts": {
     "dev": "next",
     "build": "next build",
