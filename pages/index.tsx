@@ -3,8 +3,6 @@ import { useSession, signIn } from "next-auth/react";
 import { Button } from "@mantine/core";
 import * as S from "../components/Home/Signin.style";
 import { useRouter } from "next/router";
-import Dashboard from "./dashboard";
-
 const Signin = () => {
   const router = useRouter();
   const { data } = useSession();
