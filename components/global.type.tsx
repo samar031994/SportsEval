@@ -49,3 +49,10 @@ export const reportMapping = [
     low: "The result of your assessment shows that you need improvement in reducing worries and utilizing your thinking skills effectively in competitive situations. It means that you tend to worry about your game, and experience more negative thoughts about your ability to achieve success which becomes an obstacle in your performance. Thinking positive, focusing on the present, overcoming worries and being self confident are a few mental skills that enhance your performance. Sharpening these skills will help you think clearly and make better decisions during performance. Practicing mental training regularly and building on your mental capacities will help you perform consistently every single time.",
   },
 ];
+
+export const weights = {
+  "Almost Never": 0,
+  Sometimes: 1,
+  Often: 2,
+  "Almost Always": 3,
+};

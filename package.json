@@ -1,7 +1,8 @@
 {
-  "name": "SportsEval",
+  "name": "sports-eval",
   "version": "0.1.0",
   "description": "NextJS app to create documents based on sports eval questionaires",
+  "homepage": "/",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -20,7 +21,7 @@
     "auth-js": "^0.0.16",
     "googleapis": "^148.0.0",
     "jotai": "^2.11.1",
-    "next": "^15.3.1",
+    "next": "^15.3.2",
     "next-auth": "^4.24.11",
     "react": "^19.1.0",
     "styled-components": "^6.1.14"

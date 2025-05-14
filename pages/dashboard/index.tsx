@@ -2,15 +2,19 @@ import React from "react";
 import { getSheetData } from "../api/google/googleSheets";
 import * as S from "../../components/Dashboard/Dashboard.style";
 import { Card, Text } from "@mantine/core";
-import { useRouter } from "next/router";
 import * as R from "../../components/Report/Report.atom";
 import { useAtom } from "jotai";
 import { useState } from "react";
+import { useRouter } from "next/router";
+
 const Dashboard = (props) => {
-  const { data } = props;
   const router = useRouter();
+  const { data } = props;
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  if (!data) {
+    return <Text>Loading...</Text>;
+  }
   const responseCards = data.map((card) => {
     return (
       <Card
@@ -21,7 +25,7 @@ const Dashboard = (props) => {
         component="a"
         radius="md"
         style={{
-          width: "225px",
+          width: "250px",
           cursor: "pointer",
           borderLeft: "8px solid #0070f3",
           margin: "16px",

@@ -1,11 +1,11 @@
-"use client";
 import { useAtom } from "jotai";
-import React, { useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import * as R from "../../components/Report/Report.atom";
 import * as S from "../../components/Report/Report.style";
 import { useRouter } from "next/router";
 import { reportMapping } from "../../components/global.type";
 import { Button, Card, Image, Text } from "@mantine/core";
+import { getReportDetails } from "../../components/Report/Report.helper";
 
 const getCardText = (value: number, item) => {
   let text = "";
@@ -23,12 +23,16 @@ const getCardText = (value: number, item) => {
 
 const CardMapper = () => {
   const [card] = useAtom(R.CurrentcardAtom);
-  const startIndex = 31;
-  const endIndex = 38;
-  const cardData = card.slice(startIndex, endIndex);
+  const [reportData, setReportData] = useState<number[] | null>(null);
+  useEffect(() => {
+    setReportData(getReportDetails(card));
+  }, []);
+  if (!reportData) {
+    return <Text>Loading...</Text>;
+  }
   const cardDataMapped = reportMapping.map((item, index) => {
-    const value = cardData[index];
-    const text = getCardText(parseInt(cardData[index]), item);
+    const value = reportData[index];
+    const text = getCardText(reportData[index], item);
     return (
       <Card
         style={{
