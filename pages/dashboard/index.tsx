@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { getSheetData } from "../api/google/googleSheets";
 import * as S from "../../components/Dashboard/Dashboard.style";
 import { Card, Text } from "@mantine/core";
@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 
 const Dashboard = (props) => {
   const router = useRouter();
+  useLayoutEffect(() => {
+    console.log(router);
+  }, [router]);
   const { data } = props;
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
