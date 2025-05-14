@@ -5,51 +5,54 @@ import { Card, Text } from "@mantine/core";
 import * as R from "../../components/Report/Report.atom";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Dashboard = (props) => {
-  const router = useRouter();
+  //const router = useRouter();
   const { data } = props;
-  const [routerReady, setRouterReady] = useState<boolean>(false);
-  useEffect(() => {
-    console.log(router.isReady);
-    if (router.isReady) {
-      setRouterReady(true);
-    } else {
-      setRouterReady(false);
-    }
-  }, [router.isReady]);
+  // const [routerReady, setRouterReady] = useState<boolean>(false);
+  // useEffect(() => {
+  //   console.log(router.isReady);
+  //   if (router.isReady) {
+  //     setRouterReady(true);
+  //   } else {
+  //     setRouterReady(false);
+  //   }
+  // }, [router.isReady]);
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  if (!routerReady) {
+  if (!data) {
     return <Text>Loading...</Text>;
   }
   const responseCards = data.map((card) => {
     return (
-      <Card
-        onMouseEnter={() => setHoveredCard(card[0])}
-        onMouseLeave={() => setHoveredCard(null)}
-        shadow="sm"
-        padding="xl"
-        component="a"
-        radius="md"
-        style={{
-          width: "250px",
-          cursor: "pointer",
-          borderLeft: "8px solid #0070f3",
-          margin: "16px",
-          transform: hoveredCard === card[0] ? "scale(1.05)" : "scale(1)",
-          transition: "transform 0.2s ease-in-out",
-          backgroundColor: hoveredCard === card[0] ? "#f0f8ff" : "white",
-        }}
-        key={card[0]}
-        onClick={() => {
-          setCard(card);
-          router.replace("/report");
-        }}
-      >
-        <Text>{card[0]}</Text>
-      </Card>
+      <Link href={"/report"} key={card[0]}>
+        <Card
+          onMouseEnter={() => setHoveredCard(card[0])}
+          onMouseLeave={() => setHoveredCard(null)}
+          shadow="sm"
+          padding="xl"
+          component="a"
+          radius="md"
+          style={{
+            width: "250px",
+            cursor: "pointer",
+            borderLeft: "8px solid #0070f3",
+            margin: "16px",
+            transform: hoveredCard === card[0] ? "scale(1.05)" : "scale(1)",
+            transition: "transform 0.2s ease-in-out",
+            backgroundColor: hoveredCard === card[0] ? "#f0f8ff" : "white",
+          }}
+          key={card[0]}
+          onClick={() => {
+            setCard(card);
+            // router.replace("/report");
+          }}
+        >
+          <Text>{card[0]}</Text>
+        </Card>
+      </Link>
     );
   });
   return <S.DashboardWrapper>{responseCards}</S.DashboardWrapper>;
