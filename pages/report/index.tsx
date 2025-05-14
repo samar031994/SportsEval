@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import React, { use, useEffect, useState } from "react";
 import * as R from "../../components/Report/Report.atom";
 import * as S from "../../components/Report/Report.style";
-//import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { reportMapping } from "../../components/global.type";
 import { Button, Card, Image, Text } from "@mantine/core";
 import { getReportDetails } from "../../components/Report/Report.helper";
@@ -75,10 +75,10 @@ const CardMapper = () => {
 
 const Report = () => {
   const [card] = useAtom(R.CurrentcardAtom);
-  //const router = useRouter();
+  const router = useRouter();
   useEffect(() => {
     if (!card || card.length === 0) {
-      //router.replace("/404");
+      router.replace("/404");
     }
   });
   return (
@@ -86,7 +86,7 @@ const Report = () => {
       <Button
         color="indigo"
         onClick={() => {
-          //router.replace("/dashboard");
+          router.replace("/dashboard");
         }}
       >
         Dashboard
