@@ -1,22 +1,28 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { getSheetData } from "../api/google/googleSheets";
 import * as S from "../../components/Dashboard/Dashboard.style";
 import { Card, Text } from "@mantine/core";
 import * as R from "../../components/Report/Report.atom";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Dashboard = (props) => {
   const router = useRouter();
-  useLayoutEffect(() => {
-    console.log(router);
-  }, [router]);
   const { data } = props;
+  const [routerReady, setRouterReady] = useState<boolean>(false);
+  useEffect(() => {
+    console.log(router.isReady);
+    if (router.isReady) {
+      setRouterReady(true);
+    } else {
+      setRouterReady(false);
+    }
+  }, [router.isReady]);
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  if (!data) {
-    return <Text>No data to show</Text>;
+  if (!routerReady) {
+    return <Text>Loading...</Text>;
   }
   const responseCards = data.map((card) => {
     return (
@@ -51,14 +57,14 @@ const Dashboard = (props) => {
 
 export default Dashboard;
 
-// export async function getServerSideProps() {
-//   let data;
-//   await getSheetData().then((res) => {
-//     data = res;
-//   });
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  let data;
+  await getSheetData().then((res) => {
+    data = res;
+  });
+  return {
+    props: {
+      data,
+    },
+  };
+}
