@@ -1,4 +1,3 @@
-"use client";
 import { useAtom } from "jotai";
 import React, { use, useEffect, useState } from "react";
 import * as R from "../../components/Report/Report.atom";

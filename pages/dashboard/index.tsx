@@ -15,6 +15,9 @@ const Dashboard = (props) => {
   const { data } = props;
   const [card, setCard] = useAtom(R.CurrentcardAtom);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  if (!data) {
+    return <Text>No data to show</Text>;
+  }
   const responseCards = data.map((card) => {
     return (
       <Card
@@ -48,14 +51,14 @@ const Dashboard = (props) => {
 
 export default Dashboard;
 
-export async function getServerSideProps() {
-  let data;
-  await getSheetData().then((res) => {
-    data = res;
-  });
-  return {
-    props: {
-      data,
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   let data;
+//   await getSheetData().then((res) => {
+//     data = res;
+//   });
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
