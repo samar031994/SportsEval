@@ -31,7 +31,30 @@ const CardMapper = () => {
     return <Text>Loading...</Text>;
   }
   const cardDataMapped = reportMapping.map((item, index) => {
+    let color: string;
     const value = reportData[index];
+    switch (value) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+        color = "red";
+        break;
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+        color = "yellow";
+        break;
+      case 9:
+      case 10:
+      case 11:
+      case 12:
+        color = "green";
+        break;
+    }
+    console.log("color", color);
     const text = getCardText(reportData[index], item);
     return (
       <Card
@@ -52,19 +75,49 @@ const CardMapper = () => {
           }}
         >
           <S.ColorDiv color="red" style={{ borderRadius: "8px 0 0 8px" }}>
-            <Text size="md" fw={700}>
-              (0 - 4)
-            </Text>
+            <S.SectionDiv>
+              <Text size="md" fw={700}>
+                (0 - 4)
+              </Text>
+              <Image
+                src="assets/arrow-big-up.svg"
+                alt="up arrow"
+                style={{
+                  visibility: color === "red" ? "visible" : "hidden",
+                  transform: "scale(0.5)",
+                }}
+              />
+            </S.SectionDiv>
           </S.ColorDiv>
           <S.ColorDiv color="yellow">
-            <Text size="md" fw={700}>
-              (5 - 8)
-            </Text>
+            <S.SectionDiv>
+              <Text size="md" fw={700}>
+                (5 - 8)
+              </Text>
+              <Image
+                src="assets/arrow-big-up.svg"
+                alt="up arrow"
+                style={{
+                  visibility: color === "yellow" ? "visible" : "hidden",
+                  transform: "scale(0.5)",
+                }}
+              />
+            </S.SectionDiv>
           </S.ColorDiv>
           <S.ColorDiv color="green" style={{ borderRadius: "0 8px 8px 0" }}>
-            <Text size="md" fw={700}>
-              (9 - 12)
-            </Text>
+            <S.SectionDiv>
+              <Text size="md" fw={700}>
+                (9 - 12)
+              </Text>
+              <Image
+                src="assets/arrow-big-up.svg"
+                alt="up arrow"
+                style={{
+                  visibility: color === "green" ? "visible" : "hidden",
+                  transform: "scale(0.5)",
+                }}
+              />
+            </S.SectionDiv>
           </S.ColorDiv>
         </div>
       </Card>
@@ -88,6 +141,7 @@ const Report = () => {
         onClick={() => {
           router.replace("/dashboard");
         }}
+        style={{ margin: "16px", position: "absolute", top: "0", left: "0" }}
       >
         Dashboard
       </Button>
